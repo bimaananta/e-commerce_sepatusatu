@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pembayaran</title>
+    <link rel="stylesheet" href="css/paymentCss.css">
+    <script src="js/javascript.js" type="text/javascript"></script>
+    <script src="js/angular-.1.7.5/ angular.min.js" type="text/javascript"></script>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lobster&family=Montserrat:wght@500;600;800&family=Mukta:wght@700&family=Poppins:wght@300;400;500;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lobster&family=Montserrat:wght@500;600;800&family=Mukta:wght@700&family=Poppins:wght@300;400;500;700&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .contain {
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+    }
+
+    .overlay {
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.795);
+        position: absolute;
+        z-index: 1;
+    }
+
+    .main-modal {
+        width: 700px;
+        height: 400px;
+        background-color: white;
+        padding: 20px;
+        font-family: 'Poppins', sans-serif;
+        z-index: 999;
+    }
+
+    .main-modal .confirm {
+        height: fit-content;
+        margin-top: 20px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 15px;
+    }
+
+    .confirm input {
+        width: 100%;
+        height: 35px;
+        margin-top: 5px;
+        border-radius: 5px;
+        border: none;
+        padding: 10px;
+        box-sizing: border-box;
+        background-color: rgb(236, 236, 236);
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .confirm .row {
+        margin-top: 10px;
+    }
+
+    .row-2 {
+        height: 30px;
+        display: flex;
+        align-items: center;
+    }
+
+    .row-2 input {
+        width: 20px;
+        cursor: pointer;
+    }
+
+    .row-2 label {
+        margin-left: 5px;
+    }
+
+    .tujuan {
+        margin-top: 20px;
+
+    }
+
+    .opsi {
+        width: 60%;
+        height: 60px;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .agreement {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        font-size: 15px;
+        margin-top: 10px;
+        cursor: pointer;
+    }
+
+    .agreement label {
+        margin-left: 10px;
+    }
+
+    .agreement input {
+        width: 25px;
+        height: 25px;
+        accent-color: rgb(3, 209, 3);
+    }
+
+    .option-btn {
+        width: 100%;
+        height: fit-content;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+
+    .option-btn a {
+        width: 320px;
+        height: 50px;
+        font-size: 15px;
+        font-family: 'Poppins', sans-serif;
+        border-radius: 30px;
+        border: none;
+        color: white;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+    }
+
+    .option-btn a:nth-child(1) {
+        background-color: #2f7cf8;
+    }
+
+    .option-btn a:nth-child(2) {
+        background-color: #fd3c32;
+    }
+
+    .option-btn a:nth-child(1):hover,
+    .option-btn a:nth-child(2):hover {
+        filter: brightness(90%);
+    }
+</style>
+
+<body>
+    <img src="img/header.jpg" class="background">
+    <div class="container">
+        <h1 style="margin:10px;">PAYMENT</h1>
+        <form class="payment-form" method="post">
+            <input required class="input-form laf" type="text" name="" value=""="nama" placeholder="Nama"
+                id="main-input">
+            <input required class="input-form laf" type="text" name="" value="" placeholder="No. Telepon"
+                id="main-input">
+            <input required class="input-form laf" type="text" name="" value="" placeholder="Alamat" id="main-input">
+            <select name="pilih-sepatu" id="mySelect">
+                <option value="header">Pilih Produk</option>
+                <option value="ventela">Ventela 70s</option>
+                <option value="compass">Compass Velocity</option>
+                <option value="aerostreet">Aerostreet Osaka</option>
+                <option value="thunderbear">ThunderBear Voltaire</option>
+                <option value="erons">Erons Black Dope</option>
+                <option value="minusone">MinusOne Plain BW</option>
+                <option value="wolfbrodo">Wolf Model Golden Brodo</option>
+                <option value="pedro">Pantofel Pedro Black</option>
+                <option value="geovelli">Geovelli Kasual 1903</option>
+            </select>
+            <input required class="input-form-number" type="number" name="" value="0" placeholder="Jumlah"
+                ng-model="jumlah" style="margin-top: 10px; margin-bottom: 10px; border: none;" id="jumlahBarang">
+            <select name="pilih-kurir" id="mySelect">
+                <option value="header">Pilih Ekspedisi</option>
+                <option value="jne">JNE</option>
+                <option value="jnt">J&T</option>
+                <option value="sicepat">SiCepat</option>
+                <option value="ninja">Ninja Express</option>
+                <option value="anteraja">AnterAja</option>
+            </select>
+            <textarea class="input-form" cols="5" rows="5" name="coment" placeholder="Catatan" fixed></textarea>
+            </textarea>
+            <div style="overflow-x:auto;">
+                <label>Pilih Metode Pembayaran</label>
+                <tr></tr>
+                <table border="0" cellpading="10">
+                    <tr>
+                        <form action="" class="method">
+                            <th><input type="radio" value="" id="bni" name="payment"><label for="bni"><img
+                                        src="img/bni.png" width="60px" height="20px"></label></th>
+                            <th><input type="radio" value="" id="bca" name="payment"><label for="bca"><img
+                                        src="img/bca.png" width="60px" height="20px"></label></th>
+                            <th><input type="radio" value="" id="bri" name="payment"><label for="bri"><img
+                                        src="img/bri.png" width="60px"></label></th>
+                            <th><input type="radio" value="" id="bjb" name="payment"><label for="bjb"><img
+                                        src="img/bjb.jpg" width="60px"></label></th>
+                            <th><input type="radio" value="" id="dki" name="payment"><label for="dki"><img
+                                        src="img/dki.png" width="60px"></label></th>
+                            <th><input type="radio" value="" id="bb" name="payment"><label for="bb"><img
+                                        src="img/bb.png" width="60px" height="20px"></label></th>
+                    </tr>
+                    <tr>
+                        <th><input type="radio" value="" id="visa" name="payment"><label for="visa"><img
+                                    src="img/visa.png" width="60px" height="30px"></label></th>
+                        <th><input type="radio" value="" id="master" name="payment"><label for="master"><img
+                                    src="img/master.png" width="60px"></label></th>
+                        <th><input type="radio" value="" id="paypal" name="payment"><label for="paypal"><img
+                                    src="img/paypall.png" width="60px"></label></th>
+                        <th><input type="radio" value="" id="alfamaret" name="payment"><label for="alfamaret"><img
+                                    src="img/alfamaret.png" width="60px"></label></th>
+                        <th><input type="radio" value="" id="indomaret" name="payment"><label for="indomaret"><img
+                                    src="img/indomarett.png" width="60px" height="20px"></label></th>
+                        <th><input type="radio" value="" id="gopay" name="payment"><label for="gopay"><img
+                                    src="img/gopay.png" width="65px"></label></th>
+                                </tr>
+        </form>
+                </table>
+    </div>
+    <div class="coba" style="display: flex; justify-content: center;">
+        <a class="btn-form-pay" style="text-align: center;">Pay</a>
+        <a href="more-products.html" style="color: white; text-decoration: none; text-align: center;"
+            class="btn-form-change">Batal</a>
+    </div>
+    </div>
+    <div class="contain">
+        <div class="overlay"></div>
+        <div class="main-modal">
+            <h1>Konfirmasi Pembayaran</h1>
+            <hr style="border: 2px solid #fd3c32;">
+            <form method="post">
+                <div class="confirm">
+                    <div class="row">
+                        <label for="rekening" class="row">Masukkan No. Rekening</label>
+                        <input type="text" name="rekening" id="rekening" placeholder="Nomor Rekening" class="input-confirm">
+                    </div>
+                    <div class="row">
+                        <label for="telp" class="row">Masukkan Nomor Telepon</label>
+                        <input type="text" name="telp" id="telp" placeholder="Masukkan Nomor Telepon" class="input-confirm">
+                    </div>
+                    <div class="tujuan">
+                        <p>Pilih Rekening Tujuan :</p>
+                        <div class="opsi">
+                            <div class="row-2">
+                                <input type="radio" name="rekeningtujuan" id="bca">
+                                <label for="bca">BCA 7345224421</label>
+                            </div>
+                            <div class="row-2">
+                                <input type="radio" name="rekeningtujuan" id="mandiri">
+                                <label for="mandiri">Mandiri 122033484939</label>
+                            </div>
+                            <div class="row-2">
+                                <input type="radio" name="rekeningtujuan" id="bri">
+                                <label for="bri">BRI 21700092702321</label>
+                            </div>
+                            <div class="row-2">
+                                <input type="radio" name="rekeningtujuan" id="bni">
+                                <label for="bni">BNI 6472828203747</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="agreement">
+                    <input type="checkbox" name="agree" id="agree">
+                    <label for="agree">Saya Menyetujui Syarat dan Ketentuan Pembayaran dan Kebijakan Privasi
+                        SepatuSatu</label>
+                </div>
+                <div class="option-btn">
+                    <a href="success..html" id="confirmBtn">Konfirmasi</a>
+                    <a>Batal</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        const pay = document.querySelector('.btn-form-pay');
+        const popUp = document.querySelector('.contain');
+        const batal = document.querySelector('.option-btn a:nth-child(2)');
+        const input = document.querySelectorAll('#main-input');
+        const selectElement = document.querySelectorAll("#mySelect");
+        let isFilled = false;
+        pay.addEventListener('click', function () {
+            const radio = document.getElementsByName('payment');
+            let jumlahBarang = document.getElementById('jumlahBarang');
+            let selectedOption = [];
+            let selectedValue = [];
+            let isSelected;
+            console.log(selectElement);
+            selectedOption.push(selectElement[0].options[selectElement[0].selectedIndex]);
+            selectedOption.push(selectElement[1].options[selectElement[1].selectedIndex]);
+            console.log(selectedOption);
+
+            selectedValue.push(selectedOption[0].value);
+            selectedValue.push(selectedOption[1].value);
+            console.log(selectedValue[0], selectedValue[1]);
+
+            for(let i = 0; i < radio.length; i++){
+                if(radio[i].checked){
+                    isSelected = true;
+                    break;
+                }
+                else{
+                    isSelected = false;
+                }
+            }
+            
+            for (let i = 0; i < 3; i++) {
+                if(input[i].value === "" || selectedValue[i] === "header" || isSelected === false || jumlahBarang.value === "0" || jumlahBarang.value.includes("-") || jumlahBarang.value === "") {
+                    console.log(0, selectedValue);
+                    alert("Pastikan Mengisi Semua Data Yang Diperlukan Sebelum Membayar");
+                    isFilled = false;
+                    break;
+                }
+                else {
+                    if(i < 2){
+                        isFilled = true;
+                        console.log(1, selectedValue);
+                    }
+                    else if(i === 2 && isFilled === true){
+                        popUp.style.display = "flex";
+                        console.log(2);
+                        break;
+                    }
+                }
+            }
+        });
+        batal.addEventListener('click', () => {
+            popUp.style.display = "none";
+        });
+
+        const radioConfirm = document.getElementsByName('rekeningtujuan');
+        const checkAgree = document.getElementById('agree');
+        const confirmBtn = document.getElementById('confirmBtn');
+        const alphabet =  /[a-zA-Z]/;
+
+        confirmBtn.addEventListener('click', function(e){
+            let isSelected2 = false;
+            const confirmInput = document.querySelectorAll('.input-confirm');
+            console.log(radioConfirm);
+            for(let i = 0; i < radioConfirm.length; i++){
+                if(radioConfirm[i].checked){
+                    isSelected2 = true;
+                    break;
+                }
+                else{
+                    console.log("belum di check");
+                    isSelected2 = false;
+                }
+            }
+
+            for(let i = 0; i < 2; i++){
+                if(confirmInput[i].value.length === 0 || alphabet.test(confirmInput[i].value) || !checkAgree.checked || isSelected2 === false){
+                    e.preventDefault();
+                    console.log(`kondisi ${i} tidak terpenuhi`)
+                    alert("Masukkan Data Konfirmasi baik Rekening dan Nomor Telepon Dengan Benar");
+                    break;
+                }
+                // for nya diselesaikan terlebih dahulu ternyata:v
+            }
+        })
+
+    </script>
+</body>
+
+</html>
